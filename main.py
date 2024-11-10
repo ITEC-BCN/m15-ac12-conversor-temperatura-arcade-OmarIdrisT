@@ -1,8 +1,10 @@
-// Variables globals
-let menu_option = -1
-//  Escena inicial i menú
-music.play(music.stringPlayable("E D G F B A C5 B ", 120), music.PlaybackMode.LoopingInBackground)
-scene.setBackgroundImage(img`
+#Variables globals
+menu_option = -1
+
+# Escena inicial i menú
+music.play(music.string_playable("E D G F B A C5 B ", 120),
+    music.PlaybackMode.LOOPING_IN_BACKGROUND)
+scene.set_background_image(img("""
     6666666666666666666666666666666666666666666666666966666696699999999996666669996999999999999999999999999999999999999999999999999999999999966666666666666666666666
         6666666666666666666666666666666666666666666666666696669969999999999999999999999999996999999999999999999999999999999999999999999999999996969666666696666666669666
         6666666666666666666666666699669966666666666999999999999999969999999999996999999999999999999999999999999999999999999999999999999999999999999966666669666696699696
@@ -123,9 +125,10 @@ scene.setBackgroundImage(img`
         444444444444444444444444444444444444444444444444444d444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
         4444444444444444444444444444444444444444dddd4dd4d4444444444444444444444444444444444ddd44d44d444444444444444444444444e4444444444444444444444444444444444444444444
         4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
-`)
-game.showLongText("Welcome to the Temperature Converter!", DialogLayout.Bottom)
-let my_menu = miniMenu.createMenu(miniMenu.createMenuItem("Celsius to Fahrenheit", img`
+"""))
+game.show_long_text("Welcome to the Temperature Converter!", DialogLayout.BOTTOM)
+my_menu = miniMenu.create_menu(miniMenu.create_menu_item("Celsius to Fahrenheit",
+        img("""
             1111111dbd1111111111111111111111
                 1111111d6cbdbb6dddd1111111111111
                 111111dbcccce76d664bd11111111111
@@ -171,7 +174,9 @@ let my_menu = miniMenu.createMenu(miniMenu.createMenuItem("Celsius to Fahrenheit
                 111bb111111dcc8888ccb11111111111
                 111111111111c8cccbdd111111111111
                 111111111111dddd1111111111111111
-        `), miniMenu.createMenuItem("Fahrenheit to Celsius", img`
+        """)),
+    miniMenu.create_menu_item("Fahrenheit to Celsius",
+        img("""
             111111111111f111111111f1111111111111
                 111111111111fd1111111bf1111111111111
                 111111111116fc1111111ffc111111111111
@@ -216,30 +221,29 @@ let my_menu = miniMenu.createMenu(miniMenu.createMenuItem("Celsius to Fahrenheit
                 11111111111111fff4fff111111111111111
                 111111111111111dfff11111111111111111
                 11111111111111111f111111111111111111
-        `))
-//  Funció que gestiona el menú
-my_menu.onButtonPressed(controller.A, function on_button_pressed(selection: any, selectedIndex: any) {
-    
+        """)))
+
+
+# Funció que gestiona el menú
+def on_button_pressed(selection, selectedIndex):
+    global menu_option
     my_menu.close()
     menu_option = selectedIndex
-})
-//  Funció per la conversió de C a F
-function ConvertToFahrenheit(Celsius: number): number {
-    let FahrenheitT = Math.round((Celsius * 9 / 5 + 32) * 100) / 100
+my_menu.on_button_pressed(controller.A, on_button_pressed)
+
+# Funció per la conversió de C a F
+def ConvertToFahrenheit(Celsius: number):
+    FahrenheitT = Math.round((Celsius * 9 / 5 + 32) * 100) / 100
     return FahrenheitT
-}
 
-//  Funció per la conversió de F a C
-function ConvertToCelsius(Fahrenheit: number): number {
-    let CelsiusT = Math.round((Fahrenheit - 32) * 5 / 9 * 100) / 100
+# Funció per la conversió de F a C
+def ConvertToCelsius(Fahrenheit: number):
+    CelsiusT = Math.round((Fahrenheit - 32) * 5 / 9 * 100) / 100
     return CelsiusT
-}
 
-forever(function on_forever() {
-    let CelsiusT: number;
-    let FahrenheitT: number;
-    if (menu_option == 0) {
-        scene.setBackgroundImage(img`
+def on_forever():
+    if menu_option == 0:
+        scene.set_background_image(img("""
             9999999999999999999911999119991919119999999999999999999999999999911999999999999199991999999999999999999199991999199999991999999999999999919919999999999991919919
                         999199999999999991999999199999199999199999999999999999999991999999999999999999999999999999199999999999999999999999999199999999999991199999991919999991919999d999
                         9911919999999999999999999999991119999999991999999999999999119999999999999999999999999999911999919999991911999999999991199199999999199199999919999999999199999991
@@ -360,12 +364,12 @@ forever(function on_forever() {
                         9999999999999119999999999999999919199919999999191199999999999999999991119999999999999999999991999999999119999911111999199111199119199111991999111111999999999999
                         9999999999999999199999999991991111911991199991111119999999999991199991119999199999999999999999999999999999999991119999199191199919999119991199991119999999999999
                         9999999999999999999999999991119999999911999991991999999999999199991199999199999999999999999191999191999999999999199991199919199911991919999199991999999999999999
-        `)
-        CelsiusT = game.askForNumber("Celsius to convert", 10)
+        """))
+        CelsiusT = game.ask_for_number("Celsius to convert", 10)
         FahrenheitT = ConvertToFahrenheit(CelsiusT)
-        game.splash("Fahrenheit = " + ("" + ("" + FahrenheitT)) + "ºF")
-    } else if (menu_option == 1) {
-        scene.setBackgroundImage(img`
+        game.splash("Fahrenheit = " + ("" + str(FahrenheitT)) + "ºF")
+    elif menu_option == 1:
+        scene.set_background_image(img("""
             4444444444444444444444444444444444444244445dddddd45544444d444444444444445454544444444444454555d44444444444444444244444445444555444444444444444444444444555545d5d
                         44444444444444444444444444444444444442444455ddddd45544444d5545dd44444454544444444444444444444545444444444444444422244444444444444444444444444444444444455dd44544
                         d4444444444444444224444444445444444444444544455d54444444444445dd45444454444444444424444444444444445d44442244444422222444544444444422444444444444444444455dd44444
@@ -486,10 +490,9 @@ forever(function on_forever() {
                         4444445454444444444544444444445444454444454444454544544444455d4454dddddd444d45444d4442444e4444445445445444554444222444444455444444455555554442eeeeeeee22ee222444
                         4445444444544444444444444444445445d54444444444454544444444455d44445dddddddddd4554d5444444e444445454444455444444442244444444444444444444454444eeeeeeeeeeeeeee2224
                         4454444444444444444d44445445444445dd45544444444d5444444444444d54445ddddddddddddd5d45444444442444545454445444444444e2ee4444444444444444444455d4eeeeeeeeeeeeeeee24
-        `)
-        FahrenheitT = game.askForNumber("Fahrenheit to convert", 10)
+        """))
+        FahrenheitT = game.ask_for_number("Fahrenheit to convert", 10)
         CelsiusT = ConvertToCelsius(FahrenheitT)
-        game.splash("Celsius = " + ("" + ("" + CelsiusT)) + "ºC")
-    }
-    
-})
+        game.splash("Celsius = " + ("" + str(CelsiusT)) + "ºC")
+forever(on_forever)
+
