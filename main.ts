@@ -217,6 +217,9 @@ let my_menu = miniMenu.createMenu(miniMenu.createMenuItem("Celsius to Fahrenheit
                 111111111111111dfff11111111111111111
                 11111111111111111f111111111111111111
         `))
+my_menu.setDimensions(160, 100)
+my_menu.setPosition(80, 60)
+my_menu.setTitle("Temperature converter")
 //  Funció que gestiona el menú
 my_menu.onButtonPressed(controller.A, function on_button_pressed(selection: any, selectedIndex: any) {
     

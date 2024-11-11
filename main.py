@@ -221,6 +221,9 @@ my_menu = miniMenu.create_menu(miniMenu.create_menu_item("Celsius to Fahrenheit"
                 111111111111111dfff11111111111111111
                 11111111111111111f111111111111111111
         """)))
+my_menu.set_dimensions(160, 100)
+my_menu.set_position(80, 60)
+my_menu.set_title("Temperature converter")   
 
 # Funció que gestiona el menú
 def on_button_pressed(selection, selectedIndex):
